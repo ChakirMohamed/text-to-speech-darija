@@ -4,15 +4,15 @@ import { decode, decodeAudioData, audioBufferToMp3 } from './utils/audioUtils';
 import { SpeakerIcon, LoaderIcon, PlayIcon, PauseIcon, DownloadIcon, SoundWaveIcon, VolumeHighIcon, VolumeMuteIcon, SpeedIcon } from './components/Icons';
 
 const VOICES = [
-    { id: 'Kore', name: 'Zainab (Female)' },
-    { id: 'Puck', name: 'Puck (Male)' },
-    { id: 'Charon', name: 'Charon (Male, Deep)' },
-    { id: 'Fenrir', name: 'Fenrir (Male)' },
-    { id: 'Zephyr', name: 'Zephyr (Female)' }
+    { id: 'Kore', name: 'زينب (صوت ديال مرا)' },
+    { id: 'Puck', name: 'باك (صوت ديال راجل)' },
+    { id: 'Charon', name: 'شارون (صوت ديال راجل، غليض)' },
+    { id: 'Fenrir', name: 'فنرير (صوت ديال راجل)' },
+    { id: 'Zephyr', name: 'زفير (صوت ديال مرا)' }
 ];
 
 const App: React.FC = () => {
-    const [text, setText] = useState<string>("غير كتقرّب التليفون منّو، وكتبان ليك صفحة Google ديالك مباشرة، بلا تطبيقات، بلا إعدادات، كلشي خدام دغيا.");
+    const [text, setText] = useState<string>("");
     const [selectedVoice, setSelectedVoice] = useState<string>(VOICES[0].id);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [isPreviewLoading, setIsPreviewLoading] = useState<boolean>(false);
@@ -185,7 +185,7 @@ const App: React.FC = () => {
 
     const handleGenerateAudio = useCallback(async () => {
         if (!text.trim()) {
-            setError("Please enter some text to generate speech.");
+            setError("عافاك كتب شي حاجة باش نحولوها لصوت.");
             return;
         }
 
@@ -210,7 +210,7 @@ const App: React.FC = () => {
             play();
 
         } catch (err) {
-            const errorMessage = err instanceof Error ? err.message : "An unknown error occurred.";
+            const errorMessage = err instanceof Error ? err.message : "وقع شي مشكل غير متوقع.";
             setError(errorMessage);
             setAudioBuffer(null);
         } finally {
@@ -238,7 +238,7 @@ const App: React.FC = () => {
                 previewAudioSourceRef.current = source;
             }
         } catch (err) {
-            const errorMessage = err instanceof Error ? err.message : "Could not preview voice.";
+            const errorMessage = err instanceof Error ? err.message : "ما قدرناش نجرّبو هاد الصوت.";
             setError(errorMessage);
         } finally {
             setIsPreviewLoading(false);
@@ -247,7 +247,7 @@ const App: React.FC = () => {
 
     const handleDownload = () => {
         if (!audioBuffer) {
-            setError("No audio available to download.");
+            setError("ما كاين حتا أوديو باش تيليشارجيه.");
             return;
         }
         try {
@@ -267,7 +267,7 @@ const App: React.FC = () => {
             window.URL.revokeObjectURL(url);
             a.remove();
         } catch (err) {
-            const errorMessage = err instanceof Error ? err.message : "An unknown error occurred during download.";
+            const errorMessage = err instanceof Error ? err.message : "وقع شي مشكل فتيليشارجمون.";
             setError(errorMessage);
         }
     };
@@ -282,30 +282,30 @@ const App: React.FC = () => {
 
     return (
         <div className="min-h-screen flex items-center justify-center p-4 font-sans">
-            <div className="w-full max-w-2xl bg-gray-900/80 backdrop-blur-sm rounded-2xl shadow-2xl p-6 md:p-8 space-y-6 border border-blue-800/50">
+            <div dir="rtl" className="w-full max-w-2xl bg-gray-900/80 backdrop-blur-sm rounded-2xl shadow-2xl p-6 md:p-8 space-y-6 border border-blue-800/50">
                 <header className="text-center">
-                    <h1 className="text-3xl md:text-4xl font-bold text-amber-400">Gemini TTS</h1>
-                    <p className="text-gray-400 mt-2">Bring your text to life with a Moroccan touch.</p>
+                    <h1 className="text-3xl md:text-4xl font-bold text-amber-400">Gemini: حوّل لكتبة لهضرة</h1>
+                    <p className="text-gray-400 mt-2">حوّل لكتبة ديالك لهضرة، بالصوت اللي كيعجبك.</p>
                 </header>
 
                 <div className="space-y-4">
-                    <label htmlFor="text-input" className="block text-sm font-medium text-gray-300">
-                        Enter Text (Darija)
+                    <label htmlFor="text-input" className="block text-sm font-medium text-gray-300 text-right">
+                        كتب النص ديالك هنا (بالدارجة)
                     </label>
                     <textarea
                         id="text-input"
                         dir="rtl"
                         value={text}
                         onChange={(e) => setText(e.target.value)}
-                        placeholder="اكتب أو الصق النص هنا..."
+                        placeholder="كتب ولا كولي النص ديالك هنا..."
                         className="w-full h-40 p-4 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-shadow duration-200 resize-y text-gray-200"
                         disabled={isLoading || isPreviewLoading}
                     />
                 </div>
 
                 <div className="space-y-4">
-                     <label htmlFor="voice-select" className="block text-sm font-medium text-gray-300">
-                        Select Voice
+                     <label htmlFor="voice-select" className="block text-sm font-medium text-gray-300 text-right">
+                        ختار الصوت اللي بغيتي
                     </label>
                     <div className="flex items-center gap-3">
                         <select
@@ -324,7 +324,7 @@ const App: React.FC = () => {
                         <button
                             onClick={handlePreviewVoice}
                             disabled={isLoading || isPreviewLoading}
-                            aria-label="Preview selected voice"
+                            aria-label="جرّب هاد الصوت"
                             className="flex-shrink-0 flex items-center justify-center p-3 bg-gray-700 hover:bg-gray-600 disabled:bg-gray-800 disabled:cursor-not-allowed text-white font-semibold rounded-lg shadow-md transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-gray-500/50"
                         >
                             {isPreviewLoading ? (
@@ -338,7 +338,7 @@ const App: React.FC = () => {
 
                 {error && (
                     <div className="bg-red-900/50 text-red-300 p-3 rounded-lg text-sm border border-red-800">
-                        <p><span className="font-bold">Error:</span> {error}</p>
+                        <p><span className="font-bold">مشكل:</span> {error}</p>
                     </div>
                 )}
 
@@ -352,18 +352,18 @@ const App: React.FC = () => {
                             {isLoading ? (
                                 <>
                                     <LoaderIcon className="animate-spin h-5 w-5" />
-                                    <span>Generating...</span>
+                                    <span>كيتصاوب دابا...</span>
                                 </>
                             ) : (
                                 <>
                                     <SpeakerIcon className="h-5 w-5" />
-                                    <span>Generate Speech</span>
+                                    <span>حوّل لصوت</span>
                                 </>
                             )}
                         </button>
                     ) : (
                         <div className="bg-gray-800/60 p-4 rounded-lg border border-gray-700 space-y-4">
-                            <div className="flex items-center gap-4">
+                            <div dir="ltr" className="flex items-center gap-4">
                                 <button onClick={handleTogglePlayPause} className="p-2 rounded-full bg-blue-700 hover:bg-blue-600 text-white transition-colors">
                                     {isPlaying ? <PauseIcon className="h-6 w-6"/> : <PlayIcon className="h-6 w-6"/>}
                                 </button>
@@ -388,7 +388,7 @@ const App: React.FC = () => {
                                         type="range" min="0" max="1" step="0.01" value={volume}
                                         onChange={handleVolumeChange}
                                         className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-amber-500"
-                                        aria-label="Volume control"
+                                        aria-label="تحكم فالصوت"
                                     />
                                 </div>
                                 <div className="flex items-center gap-3">
@@ -397,7 +397,7 @@ const App: React.FC = () => {
                                         type="range" min="0.5" max="2" step="0.1" value={playbackRate}
                                         onChange={handleSpeedChange}
                                         className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-amber-500"
-                                        aria-label="Playback speed"
+                                        aria-label="سرعة القراية"
                                     />
                                     <span className="text-sm font-mono text-gray-400 w-10 text-center">{playbackRate.toFixed(1)}x</span>
                                 </div>
@@ -405,11 +405,11 @@ const App: React.FC = () => {
                                      <button
                                         onClick={handleDownload}
                                         disabled={!audioBuffer || isLoading || isPreviewLoading}
-                                        aria-label="Download audio"
+                                        aria-label="تيليشارجي الملف الصوتي"
                                         className="w-full flex items-center justify-center gap-2 py-2.5 px-4 bg-gray-700 hover:bg-gray-600 disabled:bg-gray-800 disabled:text-gray-400 disabled:cursor-not-allowed text-white font-semibold rounded-lg shadow-md transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-gray-500/50"
                                     >
                                         <DownloadIcon className="h-5 w-5" />
-                                        <span>Download MP3</span>
+                                        <span>تيليشارجي MP3</span>
                                     </button>
                                 </div>
                             </div>

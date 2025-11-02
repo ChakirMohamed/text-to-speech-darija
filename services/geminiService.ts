@@ -1,4 +1,3 @@
-
 import { GoogleGenAI, Modality } from "@google/genai";
 
 export async function generateSpeech(text: string, voice: string): Promise<string> {
@@ -22,13 +21,13 @@ export async function generateSpeech(text: string, voice: string): Promise<strin
         const base64Audio = response.candidates?.[0]?.content?.parts?.[0]?.inlineData?.data;
 
         if (!base64Audio) {
-            throw new Error("No audio data was returned from the API.");
+            throw new Error("API ما رجعات حتا أوديو.");
         }
 
         return base64Audio;
     } catch (error) {
         console.error("Error calling Gemini API:", error);
         const errorMessage = error instanceof Error ? error.message : "An unknown error occurred.";
-        throw new Error(`Failed to generate speech: ${errorMessage}`);
+        throw new Error(`ماقدرناش نصاوبو الصوت: ${errorMessage}`);
     }
 }
