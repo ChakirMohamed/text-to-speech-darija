@@ -4,11 +4,11 @@ import { decode, decodeAudioData, audioBufferToMp3 } from './utils/audioUtils';
 import { SpeakerIcon, LoaderIcon, PlayIcon, PauseIcon, DownloadIcon, SoundWaveIcon, VolumeHighIcon, VolumeMuteIcon, SpeedIcon } from './components/Icons';
 
 const VOICES = [
-    { id: 'Kore', name: 'Kore (Female)' },
+    { id: 'Kore', name: 'Zainab (Female)' },
     { id: 'Puck', name: 'Puck (Male)' },
     { id: 'Charon', name: 'Charon (Male, Deep)' },
     { id: 'Fenrir', name: 'Fenrir (Male)' },
-    { id: 'Zephyr', name: 'Zephyr (Female)' },
+    { id: 'Zephyr', name: 'Zephyr (Female)' }
 ];
 
 const App: React.FC = () => {
