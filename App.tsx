@@ -4,8 +4,8 @@ import { decode, decodeAudioData, audioBufferToMp3 } from './utils/audioUtils';
 import { SpeakerIcon, LoaderIcon, PlayIcon, PauseIcon, DownloadIcon, SoundWaveIcon, VolumeHighIcon, VolumeMuteIcon, SpeedIcon } from './components/Icons';
 
 const VOICES = [
-    { id: 'Kore', name: 'زينب (صوت انثى)' },
-    { id: 'Puck', name: 'باك (صوت راجل)' },
+    { id: 'Kore', name: 'زينب (صوت ديال مرا)' },
+    { id: 'Puck', name: 'باك (صوت ديال راجل)' },
     { id: 'Charon', name: 'شارون (صوت ديال راجل، غليض)' },
     { id: 'Fenrir', name: 'فنرير (صوت ديال راجل)' },
     { id: 'Zephyr', name: 'زفير (صوت ديال مرا)' }
